@@ -20,5 +20,5 @@ class Grid:
                 pygame.draw.line(surface, variables.WHITE, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
         surface.blit(self.piece.get_circular_surface(60), (15, 15))
         pygame.display.update()
+    
         
-    def position_pieces()
