@@ -9,17 +9,21 @@ class Grid:
     def __init__(self):
         #define the dimension of the square
         self.size = variables.SIZE[0] / 8
+        self.store_pieces = []
         #loops over horizontaly in 12
-        self.piece = Piece(variables.BLACK)
     
-    def build(self, surface, mouse_pos):
+    def build(self, surface, mouse_pos, piece):
         for i in range(12):
             pygame.draw.line(surface, variables.WHITE, start_pos=(0, i * self.size), end_pos=(variables.SIZE[0], i * self.size), width=5)
             #loops over verticaly in 12
             for j in range(12):
                 pygame.draw.line(surface, variables.WHITE, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
         
-        surface.blit(self.piece.get_circular_surface(60), self.position_in_table(mouse_pos))
+        self.store_pieces.append({"piece": self.get_piece(piece) , "position": self.position_in_table(mouse_pos)})
+        
+        for dict in self.store_pieces:
+            piece_value = dict.get("piece")
+            surface.blit(piece_value.get_circular_surface(60), dict.get("position"))
         pygame.display.update()
         
     def position_in_table(self, mouse_pos):
@@ -35,5 +39,14 @@ class Grid:
                 y = position[j]
                 
         return (x, y)
+
+    def get_piece(self, piece):
+        if piece % 2 == 0:
+            piece = Piece(variables.WHITE)
+        else:
+            piece = Piece(variables.BLACK)
+            
+        return piece
+            
         
         
