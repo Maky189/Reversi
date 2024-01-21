@@ -22,6 +22,18 @@ class Grid:
         surface.blit(self.piece.get_circular_surface(60), self.position_in_table(mouse_pos))
         pygame.display.update()
         
-    def position_in_table(self, mouse_pos): 
-        position = [15, 103, 190, 277, 365, 451, 539, 627]
-        return mouse_pos
+    def position_in_table(self, mouse_pos):
+        x, y =  mouse_pos 
+        position = [15, 103, 190, 277, 365, 451, 539, 627, 700]
+        
+        for i in range(len(position) - 1):
+            if x in range(position[i], position[i + 1]):
+                x = position[i]
+                
+        for j in range(len(position) - 1):
+            if y in range(position[j], position[j + 1]):
+                y = position[j]
+                
+        return (x, y)
+        
+        

@@ -33,7 +33,7 @@ def render_window(window):
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-        
+        print(mouse_pos)
         render_main_game(window, mouse_pos)
         
 #Function to render the main game
@@ -45,10 +45,6 @@ def render_main_game(window, mouse_pos):
     window.blit(background, (0, 0))
     #render the grid
     Grid().build(window, mouse_pos)
-
-def position_pieces(window):
-    peca = Piece(variables.BLACK)
-    window.blit(peca.get_circular_surface(60), (460, 15))
     
 if __name__ == "__main__":
     main()
