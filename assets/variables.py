@@ -11,3 +11,7 @@ PIECE_SIZE = 50
 #color:
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+BLUE_GREEN = (0,255,170)
+purple = (240,0,255)
+navy_blue = (0,0,100)
+sky_blue = (0,255,255)
