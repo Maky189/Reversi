@@ -30,27 +30,33 @@ def main():
 #Function of render the window
 def render_window(window, get_pieces):
     mouse_pos = (277, 277)
+    create_piece = False
+    #Start main loop to run game
     #Start main loop to run game
     while True:
-        #Check for the user to click the exit button to get out of loop (game)
-        for event in pygame.event.get():
-            
+        # Get all the events in the event queue
+        events = pygame.event.get()
+
+        # Check each event
+        for event in events:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                render_main_game(window, mouse_pos, get_pieces)
-        
+                create_piece = True
+                render_main_game(window, mouse_pos, get_pieces, create_piece)
+        # Render the main game
 #Function to render the main game
-def render_main_game(window, mouse_pos, get_pieces):
+def render_main_game(window, mouse_pos, get_pieces, create_piece):
     
     #set the background
     background = pygame.image.load(variables.background_image4)
     background = pygame.transform.scale(background, variables.SIZE)
     window.blit(background, (0, 0))
     #render the grid
-    Grid().build(window, mouse_pos, get_pieces)
+    Grid().build(window, mouse_pos, get_pieces, create_piece)
     
 if __name__ == "__main__":
     main()
