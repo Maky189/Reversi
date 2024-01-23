@@ -26,8 +26,8 @@ class Piece:
                 
         return (x, y)
     
-    def get_piece(self, piece):
-        if piece % 2 == 0:
+    def get_piece(self, number_pieces):
+        if number_pieces % 2 == 0:
             self.color = variables.WHITE
         else:
             self.color = variables.BLACK
