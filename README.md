@@ -1,2 +1,0 @@
-# Reversi
-Our revers game

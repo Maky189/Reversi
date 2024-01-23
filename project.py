@@ -3,6 +3,7 @@ import sys
 from assets import variables
 from board import Grid
 from data import get_pieces
+from menu import main_menu
 
 #Principal function
 def main():
@@ -17,11 +18,11 @@ def main():
     
     #Call functions
     #Render Menu (Leo):
-    ...
+    if main_menu(window):
     
     #Render the main game:
-    render_window(window, lista_pecas)
-    clock.tick(60)
+        render_window(window, lista_pecas)
+        clock.tick(60)
     
     #Get out of pygame after everything
     pygame.quit()
@@ -33,12 +34,13 @@ def render_window(window, get_pieces):
     while True:
         #Check for the user to click the exit button to get out of loop (game)
         for event in pygame.event.get():
+            
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-        render_main_game(window, mouse_pos, get_pieces)
+                render_main_game(window, mouse_pos, get_pieces)
         
 #Function to render the main game
 def render_main_game(window, mouse_pos, get_pieces):

@@ -4,11 +4,8 @@ from pygame.locals import*
 import sys
 
 
-pygame.init()
-screen = pygame.display.set_mode((600, 600))
-pygame.display.set_caption("Menu Reversi")
 
-def main_menu(): 
+def main_menu(window): 
 
     item1 = pygame.Rect(200, 200, 200, 50)
     item2 = pygame.Rect(200, 270, 200, 50)
@@ -33,7 +30,7 @@ def main_menu():
                 if(event.button == 1):
                     mouse_pos = pygame.mouse.get_pos()
                     if(item1.collidepoint(mouse_pos)):
-                        print("Jogando")
+                        return True
                     elif(item2.collidepoint(mouse_pos)):
                         print("Carregandojogo")
                     elif(item3.collidepoint(mouse_pos)):
@@ -41,22 +38,21 @@ def main_menu():
                     elif(item4.collidepoint(mouse_pos)):
                         pygame.quit()
                         sys.exit()
-            screen.fill((0, 155, 155))
-            screen.blit(titulo, (230, 150))
+            window.fill((0, 155, 155))
+            window.blit(titulo, (230, 150))
 
-            pygame.draw.rect(screen, (214, 0, 79), item1) 
-            pygame.draw.rect(screen, (214, 0, 79), item2)  
-            pygame.draw.rect(screen, (214, 0, 79), item3)  
-            pygame.draw.rect(screen, (214, 0, 79), item4)     
+            pygame.draw.rect(window, (214, 0, 79), item1) 
+            pygame.draw.rect(window, (214, 0, 79), item2)  
+            pygame.draw.rect(window, (214, 0, 79), item3)  
+            pygame.draw.rect(window, (214, 0, 79), item4)     
 
-            screen.blit(texto1, (270, 215))
-            screen.blit(texto2, (240, 285))
-            screen.blit(texto3, (250, 355))
-            screen.blit(texto4, (270, 425))
+            window.blit(texto1, (270, 215))
+            window.blit(texto2, (240, 285))
+            window.blit(texto3, (250, 355))
+            window.blit(texto4, (270, 425))
 
             pygame.display.flip()
 
-main_menu()
 
 
 
