@@ -1,5 +1,4 @@
 #file to store the variables of the game
-import pygame
 
 SIZE = (700, 700)
 ROWS = 8
