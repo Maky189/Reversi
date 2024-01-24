@@ -3,7 +3,7 @@
 SIZE = (700, 700)
 ROWS = 8
 Columns = 8
-is_piece = 0
+is_piece = -1
 background_image1 = "./assets/Image/Wood.jpg"
 background_image2 = "./assets/Image/Cats.jpeg"
 background_image3 = "./assets/Image/black.png"

@@ -19,13 +19,18 @@ class Grid():
             for j in range(12):
                 pygame.draw.line(surface, variables.WHITE, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
 
-            if create_piece:
+            if create_piece and variables.is_piece >= 0:
                 get_pieces[variables.is_piece].position_in_table(mouse_pos)
                 variables.is_piece += 1
                 create_piece = False
             
-            for piece in get_pieces:
-                surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
+            if create_piece and variables.is_piece < 0:
+                variables.is_piece += 1
+                create_piece = False
+            
+            if variables.is_piece >= 0:
+                for piece in get_pieces:
+                    surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
             
         
         
