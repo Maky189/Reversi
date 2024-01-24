@@ -15,7 +15,7 @@ class Piece:
     
     def position_in_table(self, mouse_pos):
         x, y =  mouse_pos 
-        position = [15, 103, 190, 277, 365, 451, 539, 627, 700]
+        position = variables.position
         
         for i in range(len(position) - 1):
             if x in range(position[i], position[i + 1]):

@@ -26,7 +26,7 @@ class Grid():
             
             if create_piece and variables.is_piece < 0:
                 variables.is_piece += 1
-                create_piece = False
+                create_piece = False 
             
             if variables.is_piece >= 0:
                 for piece in get_pieces:

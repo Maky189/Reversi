@@ -29,7 +29,7 @@ def main():
     
 #Function of render the window
 def render_window(window, get_pieces):
-    mouse_pos = (277, 277)
+    mouse_pos = (365, 365)
     create_piece = False
     #Start main loop to run game
     #Start main loop to run game
