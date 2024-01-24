@@ -2,16 +2,18 @@
 import pygame
 from pygame.locals import*
 import sys
+from assets import variables
+
 
 
 
 def main_menu(window):
     clock = pygame.time.Clock()
 
-    item1 = pygame.Rect(200, 200, 200, 50)
-    item2 = pygame.Rect(200, 270, 200, 50)
-    item3 = pygame.Rect(200, 340, 200, 50)
-    item4 = pygame.Rect(200, 410, 200, 50)
+    item1 = pygame.Rect(250, 200, 200, 50)
+    item2 = pygame.Rect(250, 270, 200, 50)
+    item3 = pygame.Rect(250, 340, 200, 50)
+    item4 = pygame.Rect(250, 410, 200, 50)
 
     font_style = pygame.font.SysFont("chalkduster", 30)
     titulo = font_style.render("Menu Reversi", True, (0,0,100))
@@ -43,17 +45,20 @@ def main_menu(window):
                 pygame.quit()
                 sys.exit()
 
-        window.fill((0, 155, 155))
-        window.blit(titulo, (230, 150))
+        background_menu = pygame.image.load(variables.menu_image2)
+        background_menu = pygame.transform.scale(background_menu, variables.SIZE)
+        window.blit(background_menu, (0, 0))
+
+        window.blit(titulo, (280, 150))
 
         pygame.draw.rect(window, (214, 0, 79), item1) 
         pygame.draw.rect(window, (214, 0, 79), item2)  
         pygame.draw.rect(window, (214, 0, 79), item3)  
         pygame.draw.rect(window, (214, 0, 79), item4)     
 
-        window.blit(texto1, (270, 215))
-        window.blit(texto2, (240, 285))
-        window.blit(texto3, (250, 355))
-        window.blit(texto4, (270, 425))
+        window.blit(texto1, (320, 215))
+        window.blit(texto2, (290, 285))
+        window.blit(texto3, (300, 355))
+        window.blit(texto4, (320, 425))
 
         pygame.display.flip()
