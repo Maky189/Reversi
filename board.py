@@ -4,6 +4,7 @@ import pygame
 from assets import variables
 from pieces import Piece
 from assets import variables
+from logic import generate_pieces
 
 #Create the grid
 file = open('./assets/user.txt', 'a')
@@ -19,19 +20,7 @@ class Grid():
             for j in range(12):
                 pygame.draw.line(surface, variables.WHITE, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
 
-            if create_piece and variables.is_piece >= 0:
-                get_pieces[variables.is_piece].position_in_table(mouse_pos)
-                variables.is_piece += 1
-                create_piece = False
-            
-            if create_piece and variables.is_piece < 0:
-                variables.is_piece += 1
-                create_piece = False 
-            
-            if variables.is_piece >= 0:
-                for piece in get_pieces:
-                    surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
-            
+        generate_pieces(surface, mouse_pos, get_pieces, create_piece)
         
         
         pygame.display.update()
