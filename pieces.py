@@ -35,3 +35,9 @@ class Piece:
         
     def get_position_in_table(self):
         return self.position
+    
+    def is_color(self):
+        if self.color == variables.WHITE:
+            self.color = variables.BLACK
+        else:
+            self.color = variables.WHITE
