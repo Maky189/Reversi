@@ -5,7 +5,9 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
 
     if create_piece and variables.is_piece >= 3:
         get_pieces[variables.is_piece].position_in_table(mouse_pos)
-        variables.is_piece += 1
+        if set_position(get_pieces[variables.is_piece].get_position_in_table(), get_pieces):
+        #check color
+            variables.is_piece += 1
         create_piece = False
             
     if create_piece and variables.is_piece < 3:
@@ -22,14 +24,16 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
             surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
             
     
-    #for piece1 in get_pieces:
-    #       check_position(piece1.get_position_in_table(), piece2.get_position_in_table(), get_pieces)
+def set_position(position1, get_pieces):
+    for piece in get_pieces[0 : variables.is_piece + 1]:
+            #in x
+        x_piece = variables.position.index(position1[0])
+        x_reference = variables.position.index(piece.get_position_in_table()[0])
             
+            #in y
+        y_piece = variables.position.index(position1[1])
+        y_reference = variables.position.index(piece.get_position_in_table()[1])
             
-            
-            
-#def check_position(piece1, piece2, get_pieces):
-#    if get_pieces.index(piece2[0]) - 1 == get_pieces.index(piece1[0]) and get_pieces.index(piece2[1]) - 1 == get_pieces.index(piece1[1] - 1):
-#       return True
+        if (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
+            return True
         
-    
