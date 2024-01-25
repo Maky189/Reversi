@@ -4,8 +4,9 @@ from assets import variables
 def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
 
     if create_piece and variables.is_piece >= 3:
-        get_pieces[variables.is_piece].position_in_table(mouse_pos)
-        if set_position(get_pieces[variables.is_piece].get_position_in_table(), get_pieces):
+        
+        if set_position(set_position_in_table(mouse_pos), get_pieces):
+            get_pieces[variables.is_piece].position_in_table(set_position_in_table(mouse_pos))
         #check color
             variables.is_piece += 1
         create_piece = False
@@ -36,4 +37,19 @@ def set_position(position1, get_pieces):
             
         if (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
             return True
+        
+
+def set_position_in_table(mouse_pos):
+        x, y =  mouse_pos 
+        position = variables.position
+        
+        for i in range(len(position) - 1):
+            if x in range(position[i], position[i + 1]):
+                x = position[i]
+                
+        for j in range(len(position) - 1):
+            if y in range(position[j], position[j + 1]):
+                y = position[j]
+                
+        return (x, y)
         

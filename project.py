@@ -10,20 +10,20 @@ def main():
     #Begin Pygame and give title to screen
     pygame.init()
     pygame.display.set_caption("Reversi")
-    
+
     #set the window and the clock(fps) of game
     window = pygame.display.set_mode(variables.SIZE)
     clock = pygame.time.Clock()
     lista_pecas = get_pieces(64)
-    
+
     #Call functions
     #Render Menu (Leo):
     if main_menu(window):
-    
+
     #Render the main game:
         render_window(window, lista_pecas)
         clock.tick(60)
-    
+
     #Get out of pygame after everything
     pygame.quit()
     
@@ -31,7 +31,6 @@ def main():
 def render_window(window, get_pieces):
     mouse_pos = None
     create_piece = False
-    #Start main loop to run game
     #Start main loop to run game
     while True:
         # Get all the events in the event queue

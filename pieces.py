@@ -14,18 +14,7 @@ class Piece:
         return circular_image
     
     def position_in_table(self, mouse_pos):
-        x, y =  mouse_pos 
-        position = variables.position
-        
-        for i in range(len(position) - 1):
-            if x in range(position[i], position[i + 1]):
-                x = position[i]
-                
-        for j in range(len(position) - 1):
-            if y in range(position[j], position[j + 1]):
-                y = position[j]
-                
-        self.position = (x, y)
+        self.position = mouse_pos
     
     def get_piece(self, number_pieces):
         if number_pieces % 2 == 0:
