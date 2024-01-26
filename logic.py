@@ -36,20 +36,23 @@ def set_position(position1, get_pieces):
         y_reference = variables.position.index(piece.get_position_in_table()[1])
             
         if (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
-            return True
+            
+            if not(piece.color == get_pieces[variables.is_piece + 1].color):
+                piece.is_color()
+                return True
         
 
 def set_position_in_table(mouse_pos):
-        x, y =  mouse_pos 
-        position = variables.position
+    x, y =  mouse_pos 
+    position = variables.position
         
-        for i in range(len(position) - 1):
-            if x in range(position[i], position[i + 1]):
-                x = position[i]
+    for i in range(len(position) - 1):
+        if x in range(position[i], position[i + 1]):
+            x = position[i]
                 
-        for j in range(len(position) - 1):
-            if y in range(position[j], position[j + 1]):
-                y = position[j]
+    for j in range(len(position) - 1):
+        if y in range(position[j], position[j + 1]):
+            y = position[j]
                 
-        return (x, y)
+    return (x, y)
         
