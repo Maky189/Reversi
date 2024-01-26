@@ -46,7 +46,7 @@ def main_menu(window):
                 pygame.quit()
                 sys.exit()
 
-        background_menu = pygame.image.load(variables.background_image2)
+        background_menu = pygame.image.load(variables.menu_image2)
         background_menu = pygame.transform.scale(background_menu, variables.SIZE)
         window.blit(background_menu, (0, 0))
 
