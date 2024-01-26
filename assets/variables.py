@@ -4,7 +4,7 @@ SIZE = (700, 700)
 ROWS = 8
 Columns = 8
 
-is_piece = -1
+is_piece = 2
 
 position = [15, 103, 190, 277, 365, 451, 539, 627, 700]
 
