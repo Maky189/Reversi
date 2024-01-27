@@ -17,7 +17,7 @@ def main_menu(window):
 
     # Load the music file
 
-    pygame.mixer.music.load("")
+    pygame.mixer.music.load("./assets/music/beat.mp3")
 
 
     # Set the volume
