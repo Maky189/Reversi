@@ -47,23 +47,27 @@ def set_position(position1, get_pieces):
             
             if x_reference == x_piece:
                 if (y_reference + 1 == y_piece) or (y_reference - 1 == y_piece):
-                    if not(piece.color == get_pieces[variables.is_piece + 1].color):
+                    if not(piece.color == get_pieces[variables.is_piece + 1].color()):
                         piece.is_color()
                         return True
+                    if piece.color == get_pieces[variables.is_piece+ 1].color():
+                        piece._color = get_pieces[variables.is_piece + 1].color()
 
             elif y_reference == y_piece:
                 if (x_reference + 1 == x_piece) or (x_reference - 1 == x_piece):
-                    if not(piece.color == get_pieces[variables.is_piece].color):
+                    if not(piece.color == get_pieces[variables.is_piece + 1].color()):
                         piece.is_color()
                         return True
+                    if piece.color == get_pieces[variables.is_piece+ 1].color():
+                        piece._color = get_pieces[variables.is_piece + 1].color() 
                 
             elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
-                if not(piece.color == get_pieces[variables.is_piece].color):
-                    
+                if not(piece.color == get_pieces[variables.is_piece + 1].color()):
                         piece.is_color()
                         return True
-            
-            
+                if piece.color == get_pieces[variables.is_piece+ 1].color():
+                    piece._color = get_pieces[variables.is_piece + 1].color()
+                    
 
 def set_position_in_table(mouse_pos):
     x, y =  mouse_pos 

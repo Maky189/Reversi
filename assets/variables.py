@@ -15,7 +15,6 @@ background_image4 = "./assets/Image/rainbow.jpg"
 menu_image1 = "./assets/Image/menu.jpeg"
 menu_image2 = "./assets/Image/opcao2.jpg"
 
-PIECE_SIZE = 50
 #color:
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
