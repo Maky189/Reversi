@@ -22,7 +22,6 @@ def options(window):
     item4 = pygame.transform.scale(item4, variables.size_image)
     item4_rect = item4.get_rect()
 
-    font1 = pygame.font.SysFont("chalkduster", 45)
     font_style = pygame.font.SysFont("chalkduster",65)
     titulo = font_style.render("Options", True, (variables.purple))
 
@@ -53,12 +52,12 @@ def options(window):
         background_menu = pygame.transform.scale(background_menu, variables.SIZE)
         window.blit(background_menu, (0, 0))
 
-        window.blit(titulo, (208, 130))
+        window.blit(titulo, (265, 100))
 
-        window.blit(item1, (30, 30))
-        window.blit(item2, (120, 120))
-        window.blit(item3, (250, 250))
-        window.blit(item4, (500, 500))
+        window.blit(item1, (50, 200))
+        window.blit(item2, (210, 200))
+        window.blit(item3, (370, 200))
+        window.blit(item4, (530, 200))
 
         pygame.display.flip()
 
