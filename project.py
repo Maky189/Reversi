@@ -4,6 +4,7 @@ from assets import variables
 from board import Grid
 from data import get_pieces
 from menu import main_menu
+from options import options
 
 #Principal function
 def main():
@@ -18,11 +19,16 @@ def main():
 
     #Call functions
     #Render Menu (Leo):
-    if main_menu(window):
-
+    while main_menu(window) == 0:
+        pass
+    if main_menu(window) == 1:
+        
     #Render the main game:
         render_window(window, lista_pecas)
         clock.tick(60)
+        
+    elif main_menu(window) == 3:
+        options(window)
 
     #Get out of pygame after everything
     pygame.quit()
