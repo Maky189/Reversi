@@ -37,14 +37,16 @@ def main_menu(window):
         if mouse_pressed[0]:
             mouse_pos = pygame.mouse.get_pos()
             if(item1.collidepoint(mouse_pos)):
-                return True
+                return 1
             elif(item2.collidepoint(mouse_pos)):
-                print("Carregandojogo")
+                return 2
             elif(item3.collidepoint(mouse_pos)):
-                print("Opcoes")
+                return 3
             elif(item4.collidepoint(mouse_pos)):
                 pygame.quit()
                 sys.exit()
+            else:
+                return 0
 
         background_menu = pygame.image.load(variables.menu_image2)
         background_menu = pygame.transform.scale(background_menu, variables.SIZE)

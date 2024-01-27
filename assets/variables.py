@@ -1,6 +1,9 @@
 #file to store the variables of the game
 
 SIZE = (700, 700)
+size_image = (120, 120)
+
+
 ROWS = 8
 Columns = 8
 
@@ -15,7 +18,8 @@ background_image4 = "./assets/Image/rainbow.jpg"
 menu_image1 = "./assets/Image/menu.jpeg"
 menu_image2 = "./assets/Image/opcao2.jpg"
 
-PIECE_SIZE = 50
+default_image = None
+
 #color:
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
