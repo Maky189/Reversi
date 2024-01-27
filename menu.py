@@ -10,6 +10,24 @@ from assets import variables
 def main_menu(window):
     clock = pygame.time.Clock()
 
+    # Initialize the mixer module
+
+    pygame.mixer.init()
+
+
+    # Load the music file
+
+    pygame.mixer.music.load("")
+
+
+    # Set the volume
+
+    pygame.mixer.music.set_volume(0.7)
+
+
+    # Play the music
+
+    pygame.mixer.music.play(-1)
     item1 = pygame.Rect(230, 200, 250, 75)
     item2 = pygame.Rect(230, 300, 250, 75)
     item3 = pygame.Rect(230, 400, 250, 75)
