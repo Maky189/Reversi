@@ -5,7 +5,7 @@ class Piece:
     def __init__(self, piece):
         self.size = 60
         self.get_piece(piece)
-        self.position = (277, 277)
+        self.position = None
         
     def get_circular_surface(self):
         # Create a circular surface
