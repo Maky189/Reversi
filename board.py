@@ -16,9 +16,9 @@ class Grid():
 
     def build(self, surface, mouse_pos, get_pieces, create_piece):
         for i in range(12):
-            pygame.draw.line(surface, variables.WHITE, start_pos=(0, i * self.size), end_pos=(variables.SIZE[0], i * self.size), width=5)
+            pygame.draw.line(surface, variables.BLACK, start_pos=(0, i * self.size), end_pos=(variables.SIZE[0], i * self.size), width=5)
             for j in range(12):
-                pygame.draw.line(surface, variables.WHITE, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
+                pygame.draw.line(surface, variables.BLACK, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
 
         generate_pieces(surface, mouse_pos, get_pieces, create_piece)
         

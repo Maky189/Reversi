@@ -22,19 +22,24 @@ def main():
     while main_menu(window) == 0:
         pass
     if main_menu(window) == 1:
-        
+        image = variables.default_image
     #Render the main game:
-        render_window(window, lista_pecas)
+        render_window(window, lista_pecas, image)
         clock.tick(60)
         
     elif main_menu(window) == 3:
-        options(window)
+        image = options(window)
+        if image:
+            render_window(window, lista_pecas, image)
+        else:
+            render_window(window, lista_pecas, variables.default_image)
+        
 
     #Get out of pygame after everything
     pygame.quit()
     
 #Function of render the window
-def render_window(window, get_pieces):
+def render_window(window, get_pieces, image):
     mouse_pos = None
     create_piece = False
     #Start main loop to run game
@@ -51,13 +56,13 @@ def render_window(window, get_pieces):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 create_piece = True
-                render_main_game(window, mouse_pos, get_pieces, create_piece)
+                render_main_game(window, mouse_pos, get_pieces, create_piece, image)
         # Render the main game
 #Function to render the main game
-def render_main_game(window, mouse_pos, get_pieces, create_piece):
+def render_main_game(window, mouse_pos, get_pieces, create_piece, image):
     
     #set the background
-    background = pygame.image.load(variables.background_image4)
+    background = pygame.image.load(image)
     background = pygame.transform.scale(background, variables.SIZE)
     window.blit(background, (0, 0))
     #render the grid

@@ -17,8 +17,9 @@ background_image3 = "./assets/Image/black.png"
 background_image4 = "./assets/Image/rainbow.jpg"
 menu_image1 = "./assets/Image/menu.jpeg"
 menu_image2 = "./assets/Image/opcao2.jpg"
+back_icone = "./assets/Image/back.jpg"
 
-default_image = None
+default_image = background_image3
 
 #color:
 BLACK = (0, 0, 0)
