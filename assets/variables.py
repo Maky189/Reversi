@@ -15,8 +15,13 @@ background_image1 = "./assets/Image/Wood.jpg"
 background_image2 = "./assets/Image/Cats.jpeg"
 background_image3 = "./assets/Image/black.png"
 background_image4 = "./assets/Image/rainbow.jpg"
-menu_image1 = "./assets/Image/menu.jpeg"
-menu_image2 = "./assets/Image/opcao2.jpg"
+background_image5 = "./assets/Image/deserto.png"
+background_image6 = "./assets/Image/espaco.png"
+background_image7 = "./assets/Image/floresta.jpg"
+background_image8 = "./assets/Image/inverno.jpg"
+
+menu_image1 = background_image6
+menu_image2 = background_image6
 back_icone = "./assets/Image/back.jpg"
 
 default_image = background_image4
