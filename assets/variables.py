@@ -19,7 +19,7 @@ menu_image1 = "./assets/Image/menu.jpeg"
 menu_image2 = "./assets/Image/opcao2.jpg"
 back_icone = "./assets/Image/back.jpg"
 
-default_image = background_image3
+default_image = background_image4
 
 #color:
 BLACK = (0, 0, 0)

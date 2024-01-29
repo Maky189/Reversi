@@ -1,4 +1,5 @@
 import pygame
+import sys
 from assets import variables
 
 file = open("./settings.txt", "a")
@@ -14,7 +15,7 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
         create_piece = False
         
         if variables.is_piece == 64:
-            #GOES HERE
+            
             you_win(surface, variables.is_piece, get_pieces)
             
     if create_piece and variables.is_piece <= 3:
@@ -52,25 +53,24 @@ def set_position(position1, get_pieces):
             if x_reference == x_piece:
                 if (y_reference + 1 == y_piece) or (y_reference - 1 == y_piece):
                     if not(piece.color == get_pieces[variables.is_piece].color()):
-                        piece.is_color()
-                        return True
-                    if piece.color == get_pieces[variables.is_piece].color():
-                        piece._color = get_pieces[variables.is_piece].color()
+                       if piece.color() != get_pieces[variables.is_piece].color():
+                            piece.is_color()
+                            return True
 
             elif y_reference == y_piece:
                 if (x_reference + 1 == x_piece) or (x_reference - 1 == x_piece):
                     if not(piece.color == get_pieces[variables.is_piece].color()):
-                        piece.is_color()
-                        return True
-                    if piece.color == get_pieces[variables.is_piece].color():
-                        piece._color = get_pieces[variables.is_piece].color() 
+                        if piece.color() != get_pieces[variables.is_piece].color():
+                            piece.is_color()
+                            return True 
                 
             elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
-                if not(piece.color == get_pieces[variables.is_piece].color()):
+                if not(piece.color() == get_pieces[variables.is_piece].color()):
+                    if piece.color() != get_pieces[variables.is_piece].color():
                         piece.is_color()
                         return True
-                if piece.color == get_pieces[variables.is_piece].color():
-                    piece._color = get_pieces[variables.is_piece].color()
+                
+                    
                     
 
 def set_position_in_table(mouse_pos):
@@ -90,13 +90,15 @@ def set_position_in_table(mouse_pos):
 def you_win(surface, n, get_pieces):
     font = pygame.font.Font(None, 36)
     
-    if get_pieces[n - 1].color() == variables.BLACK:
+    if get_pieces[n - 1].color() == variables.BLUE_GREEN:
         text = "Black wins"
     else:
         text = "White wins"
     
-    text = font.render(text, True, (255, 255, 255))
+    text = font.render(text, True, variables.BLACK)
     text_rect = text.get_rect(center=(variables.SIZE[0] // 2, variables.SIZE[1] // 2))
     surface.blit(text, text_rect)
     pygame.display.flip()
-    pygame.time.wait(10000) 
+    pygame.time.wait(10000)
+    sys.exit("End")
+    
