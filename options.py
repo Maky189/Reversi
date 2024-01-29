@@ -6,6 +6,8 @@ from assets import variables
 def options(window):
     clock = pygame.time.Clock()
 
+    #to render the images on the screen
+
     item1 = pygame.image.load(variables.background_image1)
     item1 = pygame.transform.scale(item1, variables.size_image)
     item1_rect = item1.get_rect(topleft = (50, 200))
@@ -27,12 +29,18 @@ def options(window):
     item5_rect = item5.get_rect(topleft = (500, 500)) # changed position of item5
 
     while True:
+        
+        # to limit tha fps at 60
+        
         clock.tick(60)
 
         for event in pygame.event.get():
             if(event.type == pygame.QUIT):
                 pygame.quit()
                 sys.exit()
+                
+                #to do the maouse click change the background of the game
+                
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 mouse_pos = pygame.mouse.get_pos()
                 if item1_rect.collidepoint(mouse_pos):
@@ -46,10 +54,14 @@ def options(window):
                 elif item5_rect.collidepoint(mouse_pos):
                     return False
 
-        background_menu = pygame.image.load(variables.menu_image2)
-        background_menu = pygame.transform.scale(background_menu, variables.SIZE)
-        window.blit(background_menu, (0, 0))
+        # options background
+        
+        background = pygame.image.load(variables.menu_image2)
+        background = pygame.transform.scale(background, variables.SIZE)
+        window.blit(background, (0, 0))
 
+        #render everything
+        
         window.blit(item1, item1_rect)
         window.blit(item2, item2_rect)
         window.blit(item3, item3_rect)

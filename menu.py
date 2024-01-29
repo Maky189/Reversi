@@ -28,15 +28,22 @@ def main_menu(window):
     # Play the music
 
     pygame.mixer.music.play(-1)
+    
+    #draw the rectangles and get their position
+    
     item1 = pygame.Rect(230, 200, 250, 75)
     item2 = pygame.Rect(230, 300, 250, 75)
     item3 = pygame.Rect(230, 400, 250, 75)
     item4 = pygame.Rect(230, 500, 250, 75)
 
+    #the fonts of the title and the texts on the rectangle
+    
     font1 = pygame.font.SysFont("chalkduster", 45)
     font_style = pygame.font.SysFont("chalkduster",65)
     titulo = font_style.render("Menu Reversi", True, (variables.purple))
 
+    #writing the texts and get their own color
+    
     texto1 = font1.render("PLAY", True, (255, 255, 255))
     texto2 = font1.render("LOAD GAME", True, (255, 255, 255))
     texto3 = font1.render("OPTIONS", True, (255, 255, 255))
@@ -51,6 +58,8 @@ def main_menu(window):
                 pygame.quit()
                 sys.exit()
 
+        #do the mouse clicks
+        
         mouse_pressed = pygame.mouse.get_pressed()
         if mouse_pressed[0]:
             mouse_pos = pygame.mouse.get_pos()
@@ -66,17 +75,25 @@ def main_menu(window):
             else:
                 return 0
 
+        #render the background of the menu
+        
         background_menu = pygame.image.load(variables.menu_image2)
         background_menu = pygame.transform.scale(background_menu, variables.SIZE)
         window.blit(background_menu, (0, 0))
 
+        #render he title
+        
         window.blit(titulo, (208, 130))
 
+        #draw the rectangles and put the items on them
+        
         pygame.draw.rect(window, (214, 0, 79), item1) 
         pygame.draw.rect(window, (214, 0, 79), item2)  
         pygame.draw.rect(window, (214, 0, 79), item3)  
         pygame.draw.rect(window, (214, 0, 79), item4)     
 
+        #render the texts inside the rectangles 
+        
         window.blit(texto1, (315, 225))
         window.blit(texto2, (265, 325))
         window.blit(texto3, (285, 425))

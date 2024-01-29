@@ -6,7 +6,8 @@ from data import get_pieces
 from menu import main_menu
 from options import options
 
-'''This Python implementation of the classic board game Reversi (also known as Othello). 
+'''
+    This Python implementation of the classic board game Reversi (also known as Othello). 
     The game is played on an 8x8 grid, with two players taking turns placing black and white pieces. 
     The goal of the game is to have more of your color pieces showing when the game ends.
 '''

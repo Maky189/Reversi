@@ -2,10 +2,11 @@ import pygame
 import sys
 from assets import variables
 
-file = open("./settings.txt", "a")
+'''Function that generates the pieces in the grid'''
 
 def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
 
+    #Checks if there is the 4 pieces in the grid, if they are, start creating new pieces where the user wants
     if create_piece and variables.is_piece > 3:
         
         if set_position(set_position_in_table(mouse_pos), get_pieces):
@@ -32,14 +33,15 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
             if not(piece.get_position_in_table() == None):
                 surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
             
-    
+
+#This function checks if is a valid position and changes a piece color based on where the user played
 def set_position(position1, get_pieces):
     
     for pieces in get_pieces:
         if not(pieces.get_position_in_table() == None) and position1 == pieces.get_position_in_table():
             return False
     
-    
+    #Iterates over all the pieces in the moment and then checks if is a position in x , y or diagonal
     for piece in get_pieces[0 : variables.is_piece]:
             #in x
         if not(piece.get_position_in_table() == None):
@@ -72,7 +74,7 @@ def set_position(position1, get_pieces):
                 
                     
                     
-
+#Function to convert the position of the mouse to a valid position oin the grid
 def set_position_in_table(mouse_pos):
     x, y =  mouse_pos 
     position = variables.position
@@ -86,16 +88,26 @@ def set_position_in_table(mouse_pos):
             y = position[j]
                 
     return (x, y)
-        
+
+#Function to check if the user won, and display the winner       
 def you_win(surface, n, get_pieces):
     font = pygame.font.Font(None, 36)
     
-    if get_pieces[n - 1].color() == variables.BLUE_GREEN:
-        text = "Black wins"
-    else:
-        text = "White wins"
+    white = 0
+    black = 0
     
-    text = font.render(text, True, variables.BLACK)
+    for piece in get_pieces:
+        if piece.color() == variables.WHITE:
+            white += 1
+        else:
+            black += 1
+    
+    if black > white:
+        text = "Black Wins"
+    else:
+        text = "White Wins"
+    
+    text = font.render(text, True, variables.BLUE_GREEN)
     text_rect = text.get_rect(center=(variables.SIZE[0] // 2, variables.SIZE[1] // 2))
     surface.blit(text, text_rect)
     pygame.display.flip()
