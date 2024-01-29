@@ -33,10 +33,11 @@ The code for this game is organized into several modules:
 * `menu.py`: This module contains the code for the game menu.
 * `options.py`: This module contains the code for the game options.
 * `logic.py`: This module contains all the game logic, and checking for the valid moves.
+* `pieces.py`: This module has the pieces class, and its methods defined
 
 ## Step-by-Step Explanation of the Code
 
-The following is a step-by-step explanation of the code in the `main.py` file:
+The following is a step-by-step explanation of the code in the `project.py` file and the other modules:
 
 1. Import the necessary modules.
 2. Define the main function.
@@ -51,7 +52,7 @@ The following is a step-by-step explanation of the code in the `main.py` file:
 11. If won display the message that the user won.
 
 ## In Conclusion
-This project provides an example of how to create a simple two-player chess game using Pygame, we hope you like the ideia and feel welcome to contribute to our game.
+This project provides an example of how to create a simple two-player reversi game using Pygame, we hope you like the ideia and feel welcome to contribute to our game.
 
 ## For the future of our game
 First of all, we need to make the game to function right, this is just a begining for us, we do plan to make the game functional.

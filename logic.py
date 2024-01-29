@@ -19,6 +19,8 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
             
             you_win(surface, variables.is_piece, get_pieces)
             
+            
+    #Starts by placing the 4 inicial pieces in the board and increments pieces variable
     if create_piece and variables.is_piece <= 3:
         variables.is_piece += 1
         create_piece = False 
@@ -27,7 +29,9 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
         surface.blit(get_pieces[1].get_circular_surface(), get_pieces[1].get_position_in_table())
         surface.blit(get_pieces[2].get_circular_surface(), get_pieces[2].get_position_in_table())
         surface.blit(get_pieces[3].get_circular_surface(), get_pieces[3].get_position_in_table())
-            
+    
+    
+    #blits the created pieces in the screen         
     if variables.is_piece >= 3:
         for piece in get_pieces:
             if not(piece.get_position_in_table() == None):
@@ -43,15 +47,17 @@ def set_position(position1, get_pieces):
     
     #Iterates over all the pieces in the moment and then checks if is a position in x , y or diagonal
     for piece in get_pieces[0 : variables.is_piece]:
-            #in x
+        
+        
         if not(piece.get_position_in_table() == None):
             x_piece = variables.position.index(position1[0])
             x_reference = variables.position.index(piece.get_position_in_table()[0])
                 
-                #in y
+            
             y_piece = variables.position.index(position1[1])
             y_reference = variables.position.index(piece.get_position_in_table()[1])
             
+            #in x    
             if x_reference == x_piece:
                 if (y_reference + 1 == y_piece) or (y_reference - 1 == y_piece):
                     if not(piece.color == get_pieces[variables.is_piece].color()):
@@ -59,13 +65,15 @@ def set_position(position1, get_pieces):
                             piece.is_color()
                             return True
 
+            #in y
             elif y_reference == y_piece:
                 if (x_reference + 1 == x_piece) or (x_reference - 1 == x_piece):
                     if not(piece.color == get_pieces[variables.is_piece].color()):
                         if piece.color() != get_pieces[variables.is_piece].color():
                             piece.is_color()
                             return True 
-                
+            
+            #diagonal    
             elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
                 if not(piece.color() == get_pieces[variables.is_piece].color()):
                     if piece.color() != get_pieces[variables.is_piece].color():

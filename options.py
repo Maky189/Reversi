@@ -1,13 +1,16 @@
 import pygame
-from pygame.locals import*
+from pygame.locals import *
 import sys
 from assets import variables
+
+'''
+    This is the options file, where  we can change the background of the board.
+'''
 
 def options(window):
     clock = pygame.time.Clock()
 
-    #to render the images on the screen
-
+    #Load the images and get a rectangle for them
     item1 = pygame.image.load(variables.background_image1)
     item1 = pygame.transform.scale(item1, variables.size_image)
     item1_rect = item1.get_rect(topleft = (50, 200))
@@ -24,13 +27,14 @@ def options(window):
     item4 = pygame.transform.scale(item4, variables.size_image)
     item4_rect = item4.get_rect(topleft = (530, 200))
 
+    #This item is the go back icon
     item5 = pygame.image.load(variables.back_icone)
     item5 = pygame.transform.scale(item5, variables.size_image)
     item5_rect = item5.get_rect(topleft = (500, 500)) # changed position of item5
 
     while True:
         
-        # to limit tha fps at 60
+        # to limit the fps at 60
         
         clock.tick(60)
 
@@ -39,8 +43,7 @@ def options(window):
                 pygame.quit()
                 sys.exit()
                 
-                #to do the maouse click change the background of the game
-                
+            #Mouse click to change the background of the game
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 mouse_pos = pygame.mouse.get_pos()
                 if item1_rect.collidepoint(mouse_pos):
