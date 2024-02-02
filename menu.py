@@ -3,9 +3,7 @@ import pygame
 from pygame.locals import*
 import sys
 from assets import variables
-
-
-
+from options import options
 
 def main_menu(window):
     clock = pygame.time.Clock()
@@ -57,18 +55,17 @@ def main_menu(window):
             if(event.type == pygame.QUIT):
                 pygame.quit()
                 sys.exit()
-
-        #do the mouse clicks
-        
+                
+        #Change the menu parts acordingly to the click of the mouse
         mouse_pressed = pygame.mouse.get_pressed()
         if mouse_pressed[0]:
             mouse_pos = pygame.mouse.get_pos()
             if(item1.collidepoint(mouse_pos)):
-                return 1
+                return variables.default_image
             elif(item2.collidepoint(mouse_pos)):
                 return 2
             elif(item3.collidepoint(mouse_pos)):
-                return 3
+                return options(window)
             elif(item4.collidepoint(mouse_pos)):
                 pygame.quit()
                 sys.exit()

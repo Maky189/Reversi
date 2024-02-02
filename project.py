@@ -27,26 +27,12 @@ def main():
     #Gets the List of pieces
     lista_pecas = get_pieces(64)
 
-    #Render the Menu and checks for the output of it, leading to each part of the program:
-    while main_menu(window) == 0:
+    #Render the Menu and checks for the output of it in order to render the game
+    image = None
+    while not(image := main_menu(window)):
         pass
-    if main_menu(window) == 1:
-        image = variables.default_image
+    render_window(window, lista_pecas, image)
         
-        #Render the main game:
-        render_window(window, lista_pecas, image)
-        clock.tick(60)
-        
-    elif main_menu(window) == 3:
-        
-        #Render the options if the user choses to go there, and checks for its output:
-        image = options(window)
-        if image:
-            render_window(window, lista_pecas, image)
-        else:
-            render_window(window, lista_pecas, variables.default_image)
-        
-
     #Get out of pygame after everything
     pygame.quit()
     

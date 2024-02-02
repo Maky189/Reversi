@@ -118,7 +118,11 @@ def you_win(surface, n, get_pieces):
     text = font.render(text, True, variables.BLUE_GREEN)
     text_rect = text.get_rect(center=(variables.SIZE[0] // 2, variables.SIZE[1] // 2))
     surface.blit(text, text_rect)
+    
+    for event in pygame.event.get():
+        if event.type ==  pygame.QUIT():
+            pygame.quit()
+            sys.exit("End")
+            
     pygame.display.flip()
-    pygame.time.wait(10000)
-    sys.exit("End")
     
