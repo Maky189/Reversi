@@ -1,10 +1,9 @@
 import pygame
 import sys
 from assets import variables
-from board import Grid
+from board import grid
 from data import get_pieces
 from menu import main_menu
-from options import options
 
 '''
     This Python implementation of the classic board game Reversi (also known as Othello). 
@@ -22,7 +21,6 @@ def main():
 
     #set the window and the clock(fps) of game
     window = pygame.display.set_mode(variables.SIZE)
-    clock = pygame.time.Clock()
     
     #Gets the List of pieces
     lista_pecas = get_pieces(64)
@@ -71,7 +69,7 @@ def render_main_game(window, mouse_pos, get_pieces, create_piece, image):
     window.blit(background, (0, 0))
     
     #render the grid
-    Grid().build(window, mouse_pos, get_pieces, create_piece)
+    grid(window, mouse_pos, get_pieces, create_piece)
     
 if __name__ == "__main__":
     main()

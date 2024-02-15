@@ -2,7 +2,7 @@ import pygame
 import sys
 from assets import variables
 
-'''Function that generates the pieces in the grid'''
+'''Function that generates the pieces in the grid and handles the logic behind the game'''
 
 def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
 
@@ -25,11 +25,8 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
         variables.is_piece += 1
         create_piece = False 
         
-        surface.blit(get_pieces[0].get_circular_surface(), get_pieces[0].get_position_in_table())
-        surface.blit(get_pieces[1].get_circular_surface(), get_pieces[1].get_position_in_table())
-        surface.blit(get_pieces[2].get_circular_surface(), get_pieces[2].get_position_in_table())
-        surface.blit(get_pieces[3].get_circular_surface(), get_pieces[3].get_position_in_table())
-    
+        for i in range(3):
+            surface.blit(get_pieces[i].get_circular_surface(), get_pieces[i].get_position_in_table())
     
     #blits the created pieces in the screen         
     if variables.is_piece >= 3:
@@ -48,7 +45,6 @@ def set_position(position1, get_pieces):
     #Iterates over all the pieces in the moment and then checks if is a position in x , y or diagonal
     for piece in get_pieces[0 : variables.is_piece]:
         
-        
         if not(piece.get_position_in_table() == None):
             x_piece = variables.position.index(position1[0])
             x_reference = variables.position.index(piece.get_position_in_table()[0])
@@ -60,18 +56,38 @@ def set_position(position1, get_pieces):
             #in x    
             if x_reference == x_piece:
                 if (y_reference + 1 == y_piece) or (y_reference - 1 == y_piece):
-                    if not(piece.color == get_pieces[variables.is_piece].color()):
                        if piece.color() != get_pieces[variables.is_piece].color():
-                            piece.is_color()
-                            return True
+                           
+                            for other in get_pieces[0:variables.is_piece]:
+                                if other.get_position_in_table() != None:
+                                    
+                                    x = other.get_position_in_table()[0]
+                                    y = other.get_position_in_table()[1]
+                                    
+                                    if x == piece.get_position_in_table()[0]:
+                                        if y in variables.position[(y_reference + 1): ] or y in variables.position[0:y_reference]:
+                                            if other.color() != piece.color():
+                                                piece.is_color()
+                                                return True
 
             #in y
             elif y_reference == y_piece:
                 if (x_reference + 1 == x_piece) or (x_reference - 1 == x_piece):
                     if not(piece.color == get_pieces[variables.is_piece].color()):
                         if piece.color() != get_pieces[variables.is_piece].color():
-                            piece.is_color()
-                            return True 
+                            
+                            for other in get_pieces[0:variables.is_piece]:
+                                if other.get_position_in_table() != None:
+                                    
+                                    x = other.get_position_in_table()[0]
+                                    y = other.get_position_in_table()[1]
+                                    
+                                    if y == piece.get_position_in_table()[1]:
+                                        if x in variables.position[(x_reference + 1): ] or x in variables.position[0:x_reference]:
+                                            if other.color() != piece.color():
+                                                piece.is_color()
+                                                return True
+                            
             
             #diagonal    
             elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):

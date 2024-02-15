@@ -10,22 +10,22 @@ def main_menu(window):
 
     # Initialize the mixer module
 
-    pygame.mixer.init()
+    #pygame.mixer.init()
 
 
     # Load the music file
 
-    pygame.mixer.music.load("./assets/music/beat.mp3")
+    #pygame.mixer.music.load("./assets/music/beat.mp3")
 
 
     # Set the volume
 
-    pygame.mixer.music.set_volume(0.7)
+    #pygame.mixer.music.set_volume(0.7)
 
 
     # Play the music
 
-    pygame.mixer.music.play(-1)
+    #pygame.mixer.music.play(-1)
     
     #draw the rectangles and get their position
     

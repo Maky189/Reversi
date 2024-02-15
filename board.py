@@ -9,25 +9,18 @@ from logic import generate_pieces
 #Create the grid
 file = open('./assets/user.txt', 'a')
 
-class Grid():
-    def __init__(self):
-        #define the dimension of the square
-        self.size = variables.SIZE[0] / 8
-
-    #Method to draw the board to the screen
-    def build(self, surface, mouse_pos, get_pieces, create_piece):
-        
-        #Draws a line in x and in y of the screen
-        for i in range(12):
-            pygame.draw.line(surface, variables.BLACK, start_pos=(0, i * self.size), end_pos=(variables.SIZE[0], i * self.size), width=5)
-            for j in range(12):
-                pygame.draw.line(surface, variables.BLACK, start_pos=(j * self.size, 0), end_pos=(j * self.size, variables.SIZE[1]), width=5)
+def grid(surface, mouse_pos, get_pieces, create_piece):
+    size = variables.SIZE[0] / 8
+    #Draws a line in x and in y of the screen
+    for i in range(12):
+        pygame.draw.line(surface, variables.BLACK, start_pos=(0, i * size), end_pos=(variables.SIZE[0], i * size), width=5)
+        for j in range(12):
+            pygame.draw.line(surface, variables.BLACK, start_pos=(j * size, 0), end_pos=(j * size, variables.SIZE[1]), width=5)
 
         #Call the function to generate the pieces in the grid
-        generate_pieces(surface, mouse_pos, get_pieces, create_piece)
+    generate_pieces(surface, mouse_pos, get_pieces, create_piece)
         
-        
-        pygame.display.update()
+    pygame.display.update()
         
         
         

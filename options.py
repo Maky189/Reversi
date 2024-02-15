@@ -46,12 +46,11 @@ def options(window):
     #This item is the go back icon
     item9 = pygame.image.load(variables.back_icone)
     item9 = pygame.transform.scale(item9, variables.size_image)
-    item9_rect = item9.get_rect(topleft = (500, 500)) # changed position of item5
+    item9_rect = item9.get_rect(topleft = (500, 500))
 
     while True:
         
         # to limit the fps at 60
-        
         clock.tick(60)
 
         for event in pygame.event.get():
