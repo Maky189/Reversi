@@ -2,8 +2,6 @@
 
 import pygame
 from assets import variables
-from pieces import Piece
-from assets import variables
 from logic import generate_pieces
 
 #Create the grid

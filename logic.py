@@ -89,14 +89,127 @@ def set_position(position1, get_pieces):
                                                 return True
                             
             
-            #diagonal    
-            elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
+            #diagonal1
+            elif (x_reference - 1 == x_piece) and (y_reference - 1 == y_piece):
                 if not(piece.color() == get_pieces[variables.is_piece].color()):
                     if piece.color() != get_pieces[variables.is_piece].color():
-                        piece.is_color()
-                        return True
-                
+                        place = 1
+                        
+                        for other in get_pieces[0: variables.is_piece]:
+                            if other.get_position_in_table() != None:
+                                
+                                if diagonal(piece, other, get_pieces, place):
+                                    piece.is_color()
+                                    return True
+            
+            #diagonal2
+            elif (x_reference + 1 == x_piece) and (y_reference - 1 == y_piece):
+                if not(piece.color() == get_pieces[variables.is_piece].color()):
+                    if piece.color() != get_pieces[variables.is_piece].color():
+                        place = 2
+                        
+                        for other in get_pieces[0: variables.is_piece]:
+                            if other.get_position_in_table() != None:
+                                
+                                if diagonal(piece, other, get_pieces, place):           
+                                    piece.is_color()
+                                    return True
+            
+            #diagonal3
+            elif (x_reference - 1 == x_piece) and (y_reference + 1 == y_piece):
+                if not(piece.color() == get_pieces[variables.is_piece].color()):
+                    if piece.color() != get_pieces[variables.is_piece].color():
+                        place = 3
+
+                        for other in get_pieces[0: variables.is_piece]:
+                            if other.get_position_in_table() != None:
+                                
+                                if diagonal(piece, other, get_pieces, place):
                     
+                                    piece.is_color()
+                                    return True
+            
+            #diagonal4
+            elif (x_reference + 1 == x_piece) and (y_reference + 1 == y_piece):
+                
+                if not(piece.color() == get_pieces[variables.is_piece].color()):
+                    if piece.color() != get_pieces[variables.is_piece].color():
+                        place = 4
+                        
+                        for other in get_pieces[0: variables.is_piece]:
+                            if other.get_position_in_table() != None:
+                                
+                                if diagonal(piece, other, get_pieces, place):
+                                    piece.is_color()
+                                    return True
+                
+def diagonal(piece, other, get_pieces, place):
+    x1, y1 = other.get_position_in_table()
+    x1 = variables.position.index(x1)
+    y1 = variables.position.index(y1)
+    match place:
+        case 1:
+            x2, y2 = piece.get_position_in_table()
+            x2 = variables.position.index(x2)
+            y2 = variables.position.index(y2)
+            
+            if (x2 - 1 == x1) and (y2 - 1 == y1):
+                if other.color() != piece.color():
+                    return True
+                else:
+                    for new in get_pieces[0: variables.is_piece]:
+                        if new.get_position_in_table() != None:
+                            if diagonal(other, new, get_pieces, 1):
+                                other.is_color()
+                    return False
+        
+        case 2:
+            x2, y2 = piece.get_position_in_table()
+            x2 = variables.position.index(x2)
+            y2 = variables.position.index(y2)
+            
+            if (x2 - 1 == x1) and (y2 - 1 == y1):
+                if other.color() != piece.color():
+                    return True
+                else:
+                    for new in get_pieces[0: variables.is_piece]:
+                        if new.get_position_in_table() != None:
+                            if diagonal(other, new, get_pieces, 2):
+                                other.is_color()
+                    return False
+                
+                            
+        case 3:
+            x2, y2 = piece.get_position_in_table()
+            x2 = variables.position.index(x2)
+            y2 = variables.position.index(y2)
+            
+            if (x2 - 1 == x1) and (y2 - 1 == y1):
+                if other.color() != piece.color():
+                    return True
+                else:
+                    for new in get_pieces[0: variables.is_piece]:
+                        if new.get_position_in_table() != None:
+                            if diagonal(other, new, get_pieces, 3):
+                                other.is_color()
+                    return False
+                
+        
+        case 4:
+            x2, y2 = piece.get_position_in_table()
+            x2 = variables.position.index(x2)
+            y2 = variables.position.index(y2)
+            
+            if (x2 - 1 == x1) and (y2 - 1 == y1):
+                if other.color() != piece.color():
+                    return True
+                else:
+                    for new in get_pieces[0: variables.is_piece]:
+                        if new.get_position_in_table() != None:
+                            if diagonal(other, new, get_pieces, 4):
+                                other.is_color()
+                    return False
+    
                     
 #Function to convert the position of the mouse to a valid position oin the grid
 def set_position_in_table(mouse_pos):
