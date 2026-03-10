@@ -1,62 +1,51 @@
  # Reversi Game in Python
- 
+
 ![image](./1.png)![image](./2.png)![image](./3.png)
 
  ## Introduction
 
- This project was  developed as a part of the coursework for the module "Introduction to Programming I" offered by the University of Mindelo (UM), This is a simple implementation of the reversi game written in python. Developed using all that we studied thus far and researched.
+This project was developed as part of the coursework for the module "Introduction to Programming" at the University of Mindelo (UM) and CS50 Introduction to Programming with Python. It is a simple, educational implementation of Reversi (Othello) written in Python using Pygame. The code was written to practice event-driven programming, modular design, and basic game logic.
 
-## The Reversi game
-This Python implementation of the classic board game Reversi (also known as Othello). The game is played on an 8x8 grid, with two players taking turns placing black and white pieces. The goal of the game is to have more of your color pieces showing when the game ends.
+## About this implementation
+This program implements a two-player local Reversi game on an 8×8 board. Players alternate placing black and white circular pieces. When a newly placed piece brackets one or more contiguous opponent pieces between it and another of the player's pieces, those opponent pieces are flipped to the player's color. The game ends when the board is full; the player with the most pieces wins.
 
-## How to Play
+## How to play
 
-To play the game, you will need to:
+Requirements:
 
-1. Download and install Python 3.
-2. Install the Pygame library.
-3. Clone this repository.
-4. Open the `project.py` file in a text editor.
-5. Run the `project.py` file.
+1. Python 3
+2. Pygame (`pip install pygame`)
 
-The game will start with a menu. You can play against another human player. And you can also change the game theme in the options menu.
+Run the game:
 
-Once you have chosen your options, the game will start. You will take turns placing black and white pieces on the board. You can place a piece on a square if it is adjacent to an opponent's piece and there is a clear path to the other side of the board.
+```bash
+python3 project.py
+```
 
-When you place a piece, any of your opponent's pieces that are flanked by your pieces will be flipped to your color. The game ends when all of the squares on the board are filled. The player with the most pieces showing wins the game.
+Gameplay notes:
+- The game starts at the menu. Use the options menu to change board background.
+- Click a board cell to place a piece. Valid moves must flip at least one opponent piece.
+- The game alternates piece creation using the pool in `data.py`; the UI draws pieces from that pool.
 
-## Code Overview
+## Project structure and file responsibilities
 
-The code for this game is organized into several modules:
+- `project.py`: Program entry. Initializes Pygame, shows the menu, creates the piece pool, and forwards events to the renderer and game logic.
+- `board.py`: Draws the 8×8 grid and calls `logic.generate_pieces()` to handle move placement and rendering of pieces.
+- `data.py`: Builds and returns a list of `Piece` instances (64 total) and sets the four starting pieces in the center.
+- `pieces.py`: `Piece` class with color, position, drawing surface, and a method to flip color (`is_color()`). Each piece draws itself as a filled circle.
+- `logic.py`: Validates moves and implements flipping. The most important change was to scan in all eight directions, collect opponent pieces, and only flip when a bounding player's piece is found. This follows standard Reversi rules.
+- `menu.py` / `options.py`: Simple UI for the main menu, background selection, and playing background music.
+- `assets/variables.py`: Centralized constants (window size, colors, image paths, and `position` grid indices used to snap mouse clicks to cells).
 
-* `project.py`: This is the main module of the game. It contains the main game loop and calls the other modules to render the game.
-* `board.py`: This module contains the code for the game board. It includes methods for creating the board and rendering the board.
-* `data.py`: This module contains the code for loading the game pieces.
-* `menu.py`: This module contains the code for the game menu.
-* `options.py`: This module contains the code for the game options.
-* `logic.py`: This module contains all the game logic, and checking for the valid moves.
-* `pieces.py`: This module has the pieces class, and its methods defined
+## Design decisions and trade-offs
 
-## Step-by-Step Explanation of the Code
+- Simplicity over optimization: data structures and algorithms are intentionally clear for learning rather than heavily optimized.
+- Piece pool approach: I use a pre-created list of `Piece` objects (0–63) to simplify rendering and indexing. This keeps code approachable but could be refactored later to a board matrix for more direct lookups.
+- Modularity: UI, data, pieces, and logic are separated so each file is small and easy to modify.
 
-The following is a step-by-step explanation of the code in the `project.py` file and the other modules:
+## Known issues and next steps
 
-1. Import the necessary modules.
-2. Define the main function.
-3. Initialize Pygame and set the title of the screen.
-4. Set the window size and the clock (fps) of the game.
-5. Load the game pieces.
-6. Call the main menu
-7. Game loop - while the program is running:
-8. Handle events (keyboard presses, mouse clicks).
-9. Load the board and the pieces on it, and  display them on the screen.
-10. Check the moves of the player
-11. If won display the message that the user won.
+- The original flipping logic had edge cases; I updated the directional scanning and flipping behavior in `logic.py`. Please test corner/edge captures and long chains.
+- Future improvements: add move highlighting (show legal moves), implement an AI opponent, add save/load, and write unit tests for the core flipping logic.
 
-## In Conclusion
-This project provides an example of how to create a simple two-player reversi game using Pygame, we hope you like the ideia and feel welcome to contribute to our game.
-
-## For the future of our game
-First of all, we need to make the game to function right, this is just a begining for us, we do plan to make the game functional.
-We can add more features such as sound effects when making a move or clicking buttons.
-We have the ideia of adding customizable pieces and more themes for the board.
+It's been years since I made this project. I learned Python at my Course of University and CS50 Introduction to Programming with Python, and after a long time I've returned to it in order to publish it as my final project to this online course.

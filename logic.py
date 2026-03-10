@@ -8,137 +8,142 @@ def generate_pieces(surface, mouse_pos, get_pieces, create_piece):
 
     #Checks if there is the 4 pieces in the grid, if they are, start creating new pieces where the user wants
     if create_piece and variables.is_piece > 3:
-        
         if set_position(set_position_in_table(mouse_pos), get_pieces):
             get_pieces[variables.is_piece].position_in_table(set_position_in_table(mouse_pos))
-        #check color
             variables.is_piece += 1
         create_piece = False
-        
+
         if variables.is_piece == 64:
-            
             you_win(surface, variables.is_piece, get_pieces)
-            
-            
+
     #Starts by placing the 4 inicial pieces in the board and increments pieces variable
     if create_piece and variables.is_piece <= 3:
         variables.is_piece += 1
-        create_piece = False 
-        
+        create_piece = False
+
         for i in range(3):
             surface.blit(get_pieces[i].get_circular_surface(), get_pieces[i].get_position_in_table())
-    
-    #blits the created pieces in the screen         
+
+    #blits the created pieces in the screen
     if variables.is_piece >= 3:
         for piece in get_pieces:
             if not(piece.get_position_in_table() == None):
                 surface.blit(piece.get_circular_surface(), piece.get_position_in_table())
-            
 
-#This function checks if is a valid position and changes a piece color based on where the user played
+
+# Helper: return the piece at board coordinates (x_idx, y_idx) or None
+def _piece_at(get_pieces, x_idx, y_idx):
+    coord = (variables.position[x_idx], variables.position[y_idx])
+    for p in get_pieces:
+        if p.get_position_in_table() == coord:
+            return p
+    return None
+
+
+#This function checks if is a valid position and flips pieces based on where the user played
 def set_position(position1, get_pieces):
-    
+    # position1 is (x, y) already snapped to table positions
+    # Can't place on an occupied square
     for pieces in get_pieces:
         if not(pieces.get_position_in_table() == None) and position1 == pieces.get_position_in_table():
             return False
-    
-    #Iterates over all the pieces in the moment and then checks if is a position in x , y or diagonal
-    for piece in get_pieces[0 : variables.is_piece]:
-        
-        if not(piece.get_position_in_table() == None):
-            x_piece = variables.position.index(position1[0])
-            x_reference = variables.position.index(piece.get_position_in_table()[0])
-                
-            
-            y_piece = variables.position.index(position1[1])
-            y_reference = variables.position.index(piece.get_position_in_table()[1])
-            
-            #in x    
-            if x_reference == x_piece:
-                if (y_reference + 1 == y_piece) or (y_reference - 1 == y_piece):
-                       if piece.color() != get_pieces[variables.is_piece].color():
-                           
-                            for other in get_pieces[0:variables.is_piece]:
-                                if other.get_position_in_table() != None:
-                                    
-                                    x = other.get_position_in_table()[0]
-                                    y = other.get_position_in_table()[1]
-                                    
-                                    if x == piece.get_position_in_table()[0]:
-                                        if y in variables.position[(y_reference + 1): ] or y in variables.position[0:y_reference]:
-                                            if other.color() != piece.color():
-                                                piece.is_color()
-                                                return True
 
-            #in y
-            elif y_reference == y_piece:
-                if (x_reference + 1 == x_piece) or (x_reference - 1 == x_piece):
-                    if not(piece.color == get_pieces[variables.is_piece].color()):
-                        if piece.color() != get_pieces[variables.is_piece].color():
-                            
-                            for other in get_pieces[0:variables.is_piece]:
-                                if other.get_position_in_table() != None:
-                                    
-                                    x = other.get_position_in_table()[0]
-                                    y = other.get_position_in_table()[1]
-                                    
-                                    if y == piece.get_position_in_table()[1]:
-                                        if x in variables.position[(x_reference + 1): ] or x in variables.position[0:x_reference]:
-                                            if other.color() != piece.color():
-                                                piece.is_color()
-                                                return True
-                            
-            
-            #diagonal    
-            elif (x_reference + 1 == x_piece or x_reference - 1 == x_piece) and (y_reference + 1 == y_piece or y_reference - 1 == y_piece):
-                if not(piece.color() == get_pieces[variables.is_piece].color()):
-                    if piece.color() != get_pieces[variables.is_piece].color():
-                        piece.is_color()
-                        return True
-                
-                    
-                    
+    try:
+        x_idx = variables.position.index(position1[0])
+        y_idx = variables.position.index(position1[1])
+    except ValueError:
+        # click outside grid
+        return False
+
+    player_color = get_pieces[variables.is_piece].color()
+    opponent_color = variables.BLACK if player_color == variables.WHITE else variables.WHITE
+
+    flipped_any = False
+
+    # directions: 8 neighbors
+    directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
+    for dx, dy in directions:
+        nx = x_idx + dx
+        ny = y_idx + dy
+        pieces_to_flip = []
+
+        # first neighbor must be opponent
+        if nx < 0 or nx > 7 or ny < 0 or ny > 7:
+            continue
+
+        neighbor = _piece_at(get_pieces, nx, ny)
+        if neighbor is None or neighbor.color() != opponent_color:
+            continue
+
+        # walk along the direction
+        while 0 <= nx <= 7 and 0 <= ny <= 7:
+            current = _piece_at(get_pieces, nx, ny)
+            if current is None:
+                # reached empty square -> no capture in this direction
+                pieces_to_flip = []
+                break
+            if current.color() == player_color:
+                # bounded by player's piece -> flip collected
+                break
+            # otherwise it's opponent piece -> collect
+            pieces_to_flip.append(current)
+            nx += dx
+            ny += dy
+
+        # check final bounding piece
+        if 0 <= nx <= 7 and 0 <= ny <= 7:
+            bounding = _piece_at(get_pieces, nx, ny)
+            if bounding is not None and bounding.color() == player_color and len(pieces_to_flip) > 0:
+                # flip them
+                for p in pieces_to_flip:
+                    p.is_color()
+                flipped_any = True
+
+    return flipped_any
+
+
 #Function to convert the position of the mouse to a valid position oin the grid
 def set_position_in_table(mouse_pos):
-    x, y =  mouse_pos 
+    x, y =  mouse_pos
     position = variables.position
-        
+
     for i in range(len(position) - 1):
         if x in range(position[i], position[i + 1]):
             x = position[i]
-                
+
     for j in range(len(position) - 1):
         if y in range(position[j], position[j + 1]):
             y = position[j]
-                
+
     return (x, y)
 
-#Function to check if the user won, and display the winner       
+
+#Function to check if the user won, and display the winner
 def you_win(surface, n, get_pieces):
     font = pygame.font.Font(None, 36)
-    
+
     white = 0
     black = 0
-    
+
     for piece in get_pieces:
         if piece.color() == variables.WHITE:
             white += 1
         else:
             black += 1
-    
+
     if black > white:
         text = "Black Wins"
     else:
         text = "White Wins"
-    
+
     text = font.render(text, True, variables.BLUE_GREEN)
     text_rect = text.get_rect(center=(variables.SIZE[0] // 2, variables.SIZE[1] // 2))
     surface.blit(text, text_rect)
-    
+
     for event in pygame.event.get():
-        if event.type ==  pygame.QUIT():
+        if event.type ==  pygame.QUIT:
             pygame.quit()
             sys.exit("End")
-            
+
     pygame.display.flip()
-    
